@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Javascript: An Introduction</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <section>
+        <h3>Introduction to JavaScript</h3>
+        <p>
+          <small>Presented by Iyasu Watts</small>
+        </p>
+      </section>
+
+      <section>
+        <h2>What is Javascript?</h2>
+
+        <p class="fragment fade-up">- Has nothing to do with Java</p>
+        <p class="fragment fade-up">- Created in 1995 by Netscape as a language that was native to the brower</p>
+        <p class="fragment fade-up">- Primarily client side</p>
+        <p class="fragment fade-up">- originally designed as a scripting laguage but is actually a fully featured language</p>
+        <p class="fragment fade-up">- Complementary to and usually integrated with HTML.</p>
+      </section>
+
+      <!-- Example of nested vertical slides -->
+      <section>
+        <section>
+          <h2>What can we do with it?</h2>
+
+          <p class="fragment fade-up">- Create small interactions <br> <a href="http://matthew.wagerfield.com/parallax/">parallax</a></p>
+          <p class="fragment fade-up">- Games is browser</p>
+          <p class="fragment fade-up">- Full applications</p>
+        </section>
+        <section>
+          <h2>What are we going to build?</h2>
+          <p class="fragment fade-up">Simple Todo application</p>
+        </section>
+      </section>
+
+      <section>
+        <h2>Todo Application</h2>
+        <p>Parts of of the application</p>
+        <p class="fragment fade-in">- index.html</p>
+        <p class="fragment fade-in">- todo.js</p>
+      </section>
+
+      <section>
+        <section>
+          <h2>index.html</h2>
+          <pre><code class="hljs" data-trim contenteditable>
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang=&quot;en&quot;&gt;
+            &lt;head&gt;
+              &lt;meta charset=&quot;utf-8&quot;&gt;
+              &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=yes&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            &lt;input id=&quot;task&quot;&gt;&lt;button id=&quot;add&quot;&gt;Add&lt;/button&gt;
+            &lt;hr&gt;
+            &lt;div id=&quot;todos&quot;&gt;&lt;/div&gt;
+
+            &lt;script src=&quot;todo.js&quot;&gt;&lt;/script&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+            </code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs" data-trim contenteditable>
+            &lt;input id=&quot;task&quot;&gt;&lt;button id=&quot;add&quot;&gt;Add&lt;/button&gt;
+          </code></pre>
+          
+          <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- input element where we will enter text</p>
+          <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- button for submitting text in the input element</p>
+        </section>
+        <section>
+          <pre><code class="hljs" data-trim contenteditable>
+            &lt;div id=&quot;todos&quot;&gt;&lt;/div&gt;
+          </code></pre>
+          
+          <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- div element where todo list will be displayed</p>
+        </section>
+        <section>
+          <pre><code class="hljs" data-trim contenteditable>
+            &lt;script src=&quot;todo.js&quot;&gt;&lt;/script&gt;  
+          </code></pre>   
+          <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- loads our external Javascript file "todo.js"</p>
+        </section>
+      </section>  
+
+      <section>
+        <h2>todo.js</h2>
+        <h3> functions needed</h3>
+        <div align="center">
+        <ul>
+          <li>getTodos()</li>
+          <li>add()</li>
+          <li>show()</li>
+          <li>remove()</li>
+        </ul>
+        </div>
+      </section>
+      
+      <section>
+      <section>
+      <p>getTodos()</p>
+        <pre><code class="hljs" data-trim contenteditable>
+        function get_todos() {
+            var todos = new Array;
+            var todos_str = localStorage.getItem('todo');
+            if (todos_str != null) {
+                todos = JSON.parse(todos_str); 
+            }
+            return todos;
+        }
+        </code></pre>
+        
+        <aside class="notes">
+				-
+        </aside>
+      </section>
+      <section>
+        <p>add()</p>
+        <pre><code class="hljs" data-trim contenteditable>
+
+        function add() {
+            var task = document.getElementById('task').value;
+
+            var todos = get_todos();
+            todos.push(task);
+            localStorage.setItem('todo', JSON.stringify(todos));
+
+            show();
+
+            return false;
+        }
+        </code></pre>
+      </section>
+      <section>
+        <p>show()</p>
+        <pre><code class="hljs" data-trim contenteditable>
+        function show() {
+            var todos = get_todos();
+
+            var html = '&lt;ul&gt;';
+            for(var i=0; i&lt;todos.length; i++) {
+                html += '&lt;li&gt;' + todos[i] + '&lt;button class=&quot;remove&quot; id=&quot;' + i  + '&quot;&gt;x&lt;/button&gt;&lt;/li&gt;';
+            };
+            html += '&lt;/ul&gt;';
+
+            document.getElementById('todos').innerHTML = html;
+
+            var buttons = document.getElementsByClassName('remove');
+            for (var i=0; i &lt; buttons.length; i++) {
+                buttons[i].addEventListener('click', remove);
+            };
+        }
+        </code></pre>
+      </section>  
+      <section>
+        <p>remove()</p>
+      <pre><code class="hljs" data-trim contenteditable>
+          function remove() {
+              var id = this.getAttribute('id');
+              var todos = get_todos();
+              todos.splice(id, 1);
+              localStorage.setItem('todo', JSON.stringify(todos));
+
+              show();
+
+              return false;
+          }
+        </code></pre>
+      </section>
+      </section>  
+
+      <section style="text-align: center;">
+        <h1>THE END</h1>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: 'lib/js/classList.js',
+          condition: function() {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: 'plugin/markdown/marked.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'plugin/markdown/markdown.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'plugin/highlight/highlight.js',
+          async: true,
+          callback: function() {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: 'plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: 'plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+
+</body>
+
+</html>
