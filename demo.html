@@ -6,8 +6,8 @@
 
   <title>Javascript: An Introduction</title>
 
-  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-  <meta name="author" content="Hakim El Hattab">
+  <meta name="description" content="A simple tutorial for creating a ToDo app in JavaScript">
+  <meta name="author" content="Iyasu Watts">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -82,7 +82,7 @@
       <section>
         <section>
           <h2>index.html</h2>
-          <pre><code class="hljs" data-trim contenteditable>
+          <pre><code class="hljs html" data-trim contenteditable>
             &lt;!DOCTYPE html&gt;
             &lt;html lang=&quot;en&quot;&gt;
             &lt;head&gt;
@@ -108,14 +108,14 @@
           <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- button for submitting text in the input element</p>
         </section>
         <section>
-          <pre><code class="hljs" data-trim contenteditable>
+          <pre><code class="hljs html" data-trim contenteditable>
             &lt;div id=&quot;todos&quot;&gt;&lt;/div&gt;
           </code></pre>
           
           <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- div element where todo list will be displayed</p>
         </section>
         <section>
-          <pre><code class="hljs" data-trim contenteditable>
+          <pre><code class="hljs html" data-trim contenteditable>
             &lt;script src=&quot;todo.js&quot;&gt;&lt;/script&gt;  
           </code></pre>   
           <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;- loads our external Javascript file "todo.js"</p>
@@ -138,7 +138,7 @@
       <section>
       <section>
       <p>getTodos()</p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs js" data-trim contenteditable>
         function get_todos() {
             var todos = new Array;
             var todos_str = localStorage.getItem('todo');
@@ -155,7 +155,7 @@
       </section>
       <section>
         <p>add()</p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs js" data-trim contenteditable>
 
         function add() {
             var task = document.getElementById('task').value;
@@ -172,7 +172,7 @@
       </section>
       <section>
         <p>show()</p>
-        <pre><code class="hljs" data-trim contenteditable>
+        <pre><code class="hljs js" data-trim contenteditable>
         function show() {
             var todos = get_todos();
 
@@ -193,7 +193,7 @@
       </section>  
       <section>
         <p>remove()</p>
-      <pre><code class="hljs" data-trim contenteditable>
+      <pre><code class="hljs js" data-trim contenteditable>
           function remove() {
               var id = this.getAttribute('id');
               var todos = get_todos();
